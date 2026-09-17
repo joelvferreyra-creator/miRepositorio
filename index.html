@@ -1,12 +1,46 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Hola Mundo</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Misión 2: procesador de textos gratuito, sin registro y con exportación a PDF." />
+  <title>Misión 2 — Procesador de textos</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.8.0/mammoth.browser.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" defer></script>
+  <script src="app.js" defer></script>
 </head>
 <body>
-    <h1>Hola Bienvenido</h1>
-      <p>EStamos trabajando con git nuestra experiencia con repositorio</p>
-        <p>Prueba realizada Chau</p>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">M2</span><div><strong>Misión 2</strong><small>Procesador de textos</small></div></div>
+    <div class="document-name"><input id="documentTitle" value="Documento sin título" aria-label="Nombre del documento" /></div>
+    <div class="top-actions"><span id="saveStatus" class="save-status">Guardado local</span><button id="newDocument" class="text-button">Nuevo</button><button id="downloadPdf" class="primary-button">Descargar PDF</button></div>
+    <button id="menuButton" class="menu-button" aria-label="Abrir menú">☰</button>
+  </header>
+
+  <main class="workspace">
+    <aside id="sidebar" class="sidebar">
+      <button id="uploadTemplate" class="upload-button">＋ Subir plantilla</button>
+      <input id="fileInput" type="file" accept=".docx,.odt" hidden />
+      <p class="sidebar-label">ARCHIVOS LOCALES</p>
+      <div id="savedDocuments" class="saved-documents"></div>
+      <div class="privacy-note"><strong>Privado y gratuito</strong><span>Tus documentos se guardan solamente en este dispositivo. No necesitas correo ni cuenta.</span></div>
+    </aside>
+
+    <section class="editor-area">
+      <div class="toolbar" role="toolbar" aria-label="Herramientas de edición">
+        <select id="blockFormat" title="Formato"><option value="p">Texto normal</option><option value="h1">Título 1</option><option value="h2">Título 2</option><option value="h3">Título 3</option><option value="blockquote">Cita</option></select>
+        <select id="fontName" title="Fuente"><option value="Arial">Arial</option><option value="Georgia">Georgia</option><option value="Verdana">Verdana</option><option value="Times New Roman">Times New Roman</option></select>
+        <select id="fontSize" title="Tamaño"><option value="3">Normal</option><option value="1">Pequeño</option><option value="4">Grande</option><option value="5">Muy grande</option><option value="6">Enorme</option></select>
+        <span class="separator"></span><button data-command="bold" title="Negrita"><b>B</b></button><button data-command="italic" title="Cursiva"><i>I</i></button><button data-command="underline" title="Subrayado"><u>U</u></button>
+        <span class="separator"></span><button data-command="justifyLeft" title="Alinear a la izquierda">≡</button><button data-command="justifyCenter" title="Centrar">≡</button><button data-command="justifyRight" title="Alinear a la derecha">≡</button><button data-command="insertUnorderedList" title="Lista">☷</button><button data-command="insertOrderedList" title="Lista numerada">☷</button>
+        <span class="separator"></span><button id="insertLink" title="Insertar enlace">🔗</button><button id="clearFormat" title="Limpiar formato">Tx</button>
+      </div>
+      <div class="hint">Puedes escribir desde cero o subir una plantilla <strong>.docx</strong> / <strong>.odt</strong>. Los cambios se guardan automáticamente.</div>
+      <article id="editor" class="page" contenteditable="true" spellcheck="true"><h1>Bienvenido a Misión 2</h1><p>Comienza a escribir aquí...</p></article>
+    </section>
+  </main>
+  <footer><span>Misión 2 funciona sin registro ni correo electrónico.</span><span id="wordCount">0 palabras</span></footer>
 </body>
 </html>
